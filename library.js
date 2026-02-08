@@ -59,10 +59,26 @@ class Library {
     }); 
 
   }
+
+  init() {
+    const container = document.getElementById('library-container');
+    
+    container.addEventListener('click', (e) => {
+      // Check if the clicked element is a remove button
+      if (e.target.classList.contains('remove-btn')) {
+        // Get the index from the parent card's data-attribute
+        const index = e.target.closest('.book-card').dataset.index;
+        
+        this.removeBook(index);   // Remove from data
+        this.displayLibrary();    // Refresh the UI
+      }
+    });
+  }
 }
 // --- Implementation ---
 const myLibrary = new Library();
+myLibrary.init(); //Set up event listeners
 myLibrary.addBook("The Hobbit", "J.R.R. Tolkien", 295, false);
 myLibrary.addBook("Atomic Habits", "James Clear", 320, true);
 
-myLibrary.displayLibrary();
+myLibrary.displayLibrary(); //Display the library
