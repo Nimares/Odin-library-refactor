@@ -12,8 +12,10 @@ class Book {
     toggleRead() {
       this.isRead = !this.isRead;
     }
-  }
-  
+}
+
+// Library class
+// Collects books in an array with methods for adding, removing, and listing books
 class Library {
   constructor() {
     this.books = [];
@@ -29,14 +31,38 @@ class Library {
     this.books.splice(index, 1);
   }
 
-  listBooks() {
-    return this.books.map(book => `${book.title} - ${book.isRead ? "Read" : "Not Read"}`);
+  displayLibrary() { 
+    const libraryContainer = document.getElementById("library-container");
+
+    // Clear any existing content
+    // caused issues last time. View own solution
+    libraryContainer.innerHTML = "";
+    
+    this.books.forEach((book, index) => { 
+
+      // Book card creation using Template Literal
+      const bookCard = `
+      <div class="book-card" data-index="${index}">
+        <h3>${book.title}</h3>
+        <p>Author: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <p>Read: ${book.isRead ? "Read" : "Not Read"}</p>
+        <button class="status-btn">
+          ${book.isRead ? "Read" : "Not Read"}
+        </button>
+          <button class="remove-btn">Remove</button>
+      </div>
+      `;
+      
+      libraryContainer.insertAdjacentHTML('beforeend', bookCard)
+      
+    }); 
+
   }
 }
-
 // --- Implementation ---
 const myLibrary = new Library();
 myLibrary.addBook("The Hobbit", "J.R.R. Tolkien", 295, false);
 myLibrary.addBook("Atomic Habits", "James Clear", 320, true);
 
-console.table(myLibrary.listBooks());
+myLibrary.displayLibrary();
