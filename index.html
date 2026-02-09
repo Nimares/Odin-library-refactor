@@ -8,6 +8,17 @@
 </head>
 <body>
     <h1>My Library</h1>
+    <section class="form-container">
+        <form id="new-book-form">
+          <input type="text" id="title" placeholder="Title" required>
+          <input type="text" id="author" placeholder="Author" required>
+          <input type="number" id="pages" placeholder="Pages" required>
+          <label>
+            <input type="checkbox" id="isRead"> Read?
+          </label>
+          <button type="submit">Add Book</button>
+        </form>
+      </section>
     <div id="library-container" class="grid-layout"></div>
     <script src="library.js"></script>
 </body>
