@@ -62,7 +62,26 @@ class Library {
 
   init() {
     const container = document.getElementById('library-container');
+    const form = document.getElementById('new-book-form');
     
+    //Form Submission
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent default behaviour of reloading the page
+
+      // Form input values
+      const title = document.getElementById('title').value;
+      const author = document.getElementById('author').value;
+      const pages = document.getElementById('pages').value;
+      const isRead = document.getElementById('isRead').checked;
+
+      this.addBook(title, author, pages, isRead);
+      this.displayLibrary();
+
+      // clear form for next input
+      form.reset();
+  });
+
+    // Remove book
     container.addEventListener('click', (e) => {
       // Check if the clicked element is a remove button
       if (e.target.classList.contains('remove-btn')) {
@@ -73,6 +92,9 @@ class Library {
         this.displayLibrary();    // Refresh the UI
       }
     });
+
+
+
   }
 }
 // --- Implementation ---
