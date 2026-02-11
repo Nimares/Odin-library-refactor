@@ -80,16 +80,22 @@ class Library {
       // clear form for next input
       form.reset();
   });
-
     // Remove book
     container.addEventListener('click', (e) => {
-      // Check if the clicked element is a remove button
+      // Get the index from the parent card's data-attribute
+      const index = e.target.closest('.book-card').dataset.index;
+      if (!index) return; // Exit if we didn't click a card
+     
+      //Check remove 
       if (e.target.classList.contains('remove-btn')) {
-        // Get the index from the parent card's data-attribute
-        const index = e.target.closest('.book-card').dataset.index;
-        
         this.removeBook(index);   // Remove from data
         this.displayLibrary();    // Refresh the UI
+      }
+
+      // Check for Toggle Status
+      if (e.target.classList.contains('status-btn')) {
+        this.books[index].toggleRead(); // Calls the method in your Book class
+        this.displayLibrary();          // Refresh the UI to show the new state
       }
     });
 
