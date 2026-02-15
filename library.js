@@ -41,13 +41,14 @@ class Library {
     this.books.forEach((book, index) => { 
 
       // Book card creation using Template Literal
+      // TO-DO: Review pros/Cons of string literal + insertadjecent technique
       const bookCard = `
       <div class="book-card" data-index="${index}">
         <h3>${book.title}</h3>
         <p>Author: ${book.author}</p>
         <p>Pages: ${book.pages}</p>
         <p>Read: ${book.isRead ? "Read" : "Not Read"}</p>
-        <button class="status-btn">
+        <button class="status-btn ${book.isRead ? 'read-true' : 'read-false'}">
           ${book.isRead ? "Read" : "Not Read"}
         </button>
           <button class="remove-btn">Remove</button>
